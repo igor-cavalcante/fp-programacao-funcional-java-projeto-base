@@ -1,6 +1,7 @@
 package exercicios;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Aplicação de exemplo de princípios de programação funcional em Java,
@@ -22,6 +23,14 @@ public class AppProgramacaoFuncional {
     private final List<Estudante> estudantes = new StudentGenerator().generate(TOTAL_ESTUDANTES);
 
     public AppProgramacaoFuncional() {
+
+        Double maiorNota = estudantes.stream().filter( (Estudante e) -> e.getNota() == 'M')
+                    .mapToDouble((Estudante e) -> e.getNota())
+                    .max()
+                    .orElse(0);
+
+
+        System.out.print(maiorNota);
 
     }
 

@@ -38,6 +38,7 @@ public class Aula04 extends Aula {
         System.out.printf("Média de notas dos Estudantes do curso de %s: %.2f%n", curso.getNome(), mediaNotaTodosEstudantesCurso(estudantes.stream(), curso));
         System.out.printf("Total dos homens do curso de %s: %d%n", curso.getNome(), totalEstudantesCursoAndSexo(estudantes.stream(), curso, homem));
         System.out.printf("Total das mulheres do curso de %s: %d%n", curso.getNome(), totalEstudantesCursoAndSexo(estudantes.stream(), curso, mulher));
+
     }
 
     /**
@@ -48,7 +49,6 @@ public class Aula04 extends Aula {
     }
 
     protected double maiorNotaCursoAndSexo(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso, final char sexo) {
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
         return -1;
     }
 
@@ -64,13 +64,15 @@ public class Aula04 extends Aula {
 
     protected double maiorNotaTodosEstudantes(@NonNull final Stream<Estudante> stream){
         // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+        return  stream.mapToDouble((Estudante e) -> e.getNota() )
+                .max()
+                .orElse(Double.NaN);
     }
 
 
     protected double maiorNotaHomens(@NonNull final Stream<Estudante> stream){
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+      return -1;
+
     }
 }
 
