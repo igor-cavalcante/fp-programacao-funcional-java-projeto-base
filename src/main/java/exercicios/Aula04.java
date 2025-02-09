@@ -63,7 +63,10 @@ public class Aula04 extends Aula {
 
     protected double mediaNotaTodosEstudantesCurso(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso){
         // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return -1;
+        return  stream.filter(e -> e.getCurso() == curso)
+                .mapToDouble(e -> e.getNota())
+                .average()
+                .orElse(Double.NaN);
     }
 
     protected double maiorNotaTodosEstudantes(@NonNull final Stream<Estudante> stream){
@@ -73,14 +76,11 @@ public class Aula04 extends Aula {
                 .orElse(Double.NaN);
     }
 
-
     protected double maiorNotaHomens(@NonNull final Stream<Estudante> stream){
       return stream.filter(estudante -> estudante.getSexo() == 'M')
               .mapToDouble(e -> e.getNota())
               .max()
               .orElse(0);
-
-
     }
 }
 
