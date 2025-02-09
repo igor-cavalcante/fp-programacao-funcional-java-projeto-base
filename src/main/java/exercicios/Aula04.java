@@ -49,7 +49,10 @@ public class Aula04 extends Aula {
     }
 
     protected double maiorNotaCursoAndSexo(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso, final char sexo) {
-        return -1;
+        return stream.filter(e -> e.getCurso() == curso && e.getSexo() == sexo)
+                .mapToDouble(e -> e.getNota())
+                .max()
+                .orElse(Double.NaN);
     }
 
     protected long totalEstudantesCursoAndSexo(@NonNull final Stream<Estudante> stream, @NonNull final Curso curso, final char sexo) {
