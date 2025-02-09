@@ -71,7 +71,11 @@ public class Aula04 extends Aula {
 
 
     protected double maiorNotaHomens(@NonNull final Stream<Estudante> stream){
-      return -1;
+      return stream.filter(estudante -> estudante.getSexo() == 'M')
+              .mapToDouble(e -> e.getNota())
+              .max()
+              .orElse(0);
+
 
     }
 }
