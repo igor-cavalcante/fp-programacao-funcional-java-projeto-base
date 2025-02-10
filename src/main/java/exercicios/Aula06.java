@@ -51,6 +51,9 @@ public class Aula06 extends Aula {
         System.out.println("" +
                 "");
         getEstudantesMulheresAprovadasOrdenadasPorCursoAndNota().forEach(System.out::println);
+        System.out.println("" +
+                "");
+        getEstudantesMulheresAprovadasOrdenadasPorCursoDecrescenteAndNotaCrescente().forEach(System.out::println);
     }
 
     /**
@@ -85,10 +88,13 @@ public class Aula06 extends Aula {
      */
     public List<Estudante> getEstudantesMulheresAprovadasOrdenadasPorCursoAndNota() {
 
-        return getEstudantesMulheresAprovadas(estudantes.stream())
-                .stream().sorted(Comparator.comparing(Estudante::getCurso)
-                        .thenComparing(Estudante::getNota, Comparator.reverseOrder()))
-                .toList();
+        return List.copyOf(
+                getEstudantesMulheresAprovadas(estudantes.stream())
+                        .stream()
+                        .sorted(Comparator.comparing(Estudante::getCurso)
+                                .thenComparing(Estudante::getNota, Comparator.reverseOrder()))
+                        .toList()
+        );
     }
 
     /**
@@ -98,8 +104,13 @@ public class Aula06 extends Aula {
      * @return uma Lista <b>NÃO-MODIFICÁVEL</b> de estudantes selecionados pelo predicado {@link #mulheresAprovadas}
      */
     public List<Estudante> getEstudantesMulheresAprovadasOrdenadasPorCursoDecrescenteAndNotaCrescente() {
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return null;
+        return List.copyOf(
+                getEstudantesMulheresAprovadas(estudantes.stream())
+                        .stream()
+                        .sorted(Comparator.comparing(Estudante::getCurso, Comparator.reverseOrder())
+                                .thenComparing(Estudante::getNota))
+                        .toList()
+        );
     }
 
     /**
