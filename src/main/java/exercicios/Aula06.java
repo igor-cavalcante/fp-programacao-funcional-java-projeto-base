@@ -2,6 +2,7 @@ package exercicios;
 
 import exercicios.base.Aula;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -47,7 +48,7 @@ public class Aula06 extends Aula {
         final char homem = 'M';
         final char mulher = 'F';
 
-        getEstudantesMulheresAprovadas(estudantes.stream()).forEach(System.out::println);
+        getEstudantesMulheresAprovadas().forEach(System.out::println);
         System.out.println("" +
                 "");
         getEstudantesMulheresAprovadasOrdenadasPorCursoAndNota().forEach(System.out::println);
@@ -74,13 +75,11 @@ public class Aula06 extends Aula {
      *
      * @return uma Lista <b>NÃO-MODIFICÁVEL</b> de estudantes selecionados pelo predicado {@link #mulheresAprovadas}
      */
-    public List<Estudante> getEstudantesMulheresAprovadas(Stream<Estudante> stream) {
-        List<Estudante> estudantes = stream
+    public List<Estudante> getEstudantesMulheresAprovadas() {
+        return List.copyOf(estudantes.stream()
                 .filter(mulheresAprovadas)
-                .toList();
-
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return List.copyOf(estudantes);
+                        .toList()
+        );
     }
 
     /**
@@ -92,10 +91,10 @@ public class Aula06 extends Aula {
     public List<Estudante> getEstudantesMulheresAprovadasOrdenadasPorCursoAndNota() {
 
         return List.copyOf(
-                getEstudantesMulheresAprovadas(estudantes.stream())
+                getEstudantesMulheresAprovadas()
                         .stream()
                         .sorted(Comparator.comparing(Estudante::getCurso)
-                                .thenComparing(Estudante::getNota, Comparator.reverseOrder()))
+                                .thenComparing(Estudante::getNota))
                         .toList()
         );
     }
@@ -108,7 +107,7 @@ public class Aula06 extends Aula {
      */
     public List<Estudante> getEstudantesMulheresAprovadasOrdenadasPorCursoDecrescenteAndNotaCrescente() {
         return List.copyOf(
-                getEstudantesMulheresAprovadas(estudantes.stream())
+                getEstudantesMulheresAprovadas()
                         .stream()
                         .sorted(Comparator.comparing(Estudante::getCurso, Comparator.reverseOrder())
                                 .thenComparing(Estudante::getNota,Comparator.naturalOrder()))
@@ -125,9 +124,7 @@ public class Aula06 extends Aula {
      */
     public List<Estudante> getEstudantesMulheresAprovadasNaoOrdenadasModificavel() {
 
-        return getEstudantesMulheresAprovadas(estudantes.stream())
-                .stream()
-                .toList();
+        return new ArrayList<>(getEstudantesMulheresAprovadas());
     }
 
     /**
@@ -138,10 +135,11 @@ public class Aula06 extends Aula {
      */
     public List<Estudante> getEstudantesMulheresAprovadasOrdenadasTotalmenteDecrescente() {
 
-        return getEstudantesMulheresAprovadas(estudantes.stream()).stream()
+        return List.copyOf(getEstudantesMulheresAprovadas().stream()
                 .sorted(Comparator.comparing(Estudante::getCurso, Comparator.reverseOrder())
                         .thenComparing(Estudante::getNota, Comparator.reverseOrder()))
-                .toList();
+                .toList()
+        );
     }
 
     /**
@@ -153,9 +151,9 @@ public class Aula06 extends Aula {
     public List<Estudante> getEstudantesMulheresAprovadasOrdenadasPorCursoCrescenteAndNotaDecrescente() {
 
         return List.copyOf(
-                getEstudantesMulheresAprovadas(estudantes.stream())
+                getEstudantesMulheresAprovadas()
                         .stream()
-                        .sorted(Comparator.comparing(Estudante::getCurso, Comparator.naturalOrder())
+                        .sorted(Comparator.comparing(Estudante::getCurso)
                                 .thenComparing(Estudante::getNota, Comparator.reverseOrder()))
                         .toList()
         );
