@@ -137,8 +137,11 @@ public class Aula06 extends Aula {
      * @return uma Lista <b>NÃO-MODIFICÁVEL</b> de estudantes selecionados pelo predicado {@link #mulheresAprovadas}
      */
     public List<Estudante> getEstudantesMulheresAprovadasOrdenadasTotalmenteDecrescente() {
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return null;
+
+        return getEstudantesMulheresAprovadas(estudantes.stream()).stream()
+                .sorted(Comparator.comparing(Estudante::getCurso, Comparator.reverseOrder())
+                        .thenComparing(Estudante::getNota, Comparator.reverseOrder()))
+                .toList();
     }
 
     /**
@@ -148,7 +151,13 @@ public class Aula06 extends Aula {
      * @return uma Lista <b>NÃO-MODIFICÁVEL</b> de estudantes selecionados pelo predicado {@link #mulheresAprovadas}
      */
     public List<Estudante> getEstudantesMulheresAprovadasOrdenadasPorCursoCrescenteAndNotaDecrescente() {
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return null;
+
+        return List.copyOf(
+                getEstudantesMulheresAprovadas(estudantes.stream())
+                        .stream()
+                        .sorted(Comparator.comparing(Estudante::getCurso, Comparator.naturalOrder())
+                                .thenComparing(Estudante::getNota, Comparator.reverseOrder()))
+                        .toList()
+        );
     }
 }
