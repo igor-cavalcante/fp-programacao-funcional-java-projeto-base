@@ -2,8 +2,10 @@ package exercicios;
 
 import exercicios.base.Aula;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Esta é uma classe para você poder implementar as atividades propostas no README.
@@ -22,6 +24,9 @@ import java.util.function.Predicate;
  * @author Manoel Campos da Silva Filho
  */
 public class Aula06 extends Aula {
+
+
+
     /**
      * {@link Predicate<Estudante>} que seleciona somente as mulheres
      * matriculadas em algum curso e com nota maior ou igual a 6.
@@ -38,6 +43,14 @@ public class Aula06 extends Aula {
      */
     public Aula06() {
         //TODO: Insira chamdas das funções existentes aqui, para você conferir como estão funcionando
+        final var curso = generator.CURSOS[3];
+        final char homem = 'M';
+        final char mulher = 'F';
+
+        getEstudantesMulheresAprovadas(estudantes.stream()).forEach(System.out::println);
+        System.out.println("" +
+                "");
+        getEstudantesMulheresAprovadasOrdenadasPorCursoAndNota().forEach(System.out::println);
     }
 
     /**
@@ -55,9 +68,13 @@ public class Aula06 extends Aula {
      *
      * @return uma Lista <b>NÃO-MODIFICÁVEL</b> de estudantes selecionados pelo predicado {@link #mulheresAprovadas}
      */
-    public List<Estudante> getEstudantesMulheresAprovadas() {
+    public List<Estudante> getEstudantesMulheresAprovadas(Stream<Estudante> stream) {
+        List<Estudante> estudantes = stream
+                .filter(mulheresAprovadas)
+                .toList();
+
         // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return null;
+        return estudantes;
     }
 
     /**
@@ -67,8 +84,11 @@ public class Aula06 extends Aula {
      * @return uma Lista <b>NÃO-MODIFICÁVEL</b> de estudantes selecionados pelo predicado {@link #mulheresAprovadas}
      */
     public List<Estudante> getEstudantesMulheresAprovadasOrdenadasPorCursoAndNota() {
-        // TODO: Você precisa implementar este método. Apague estas linhas e escreva o código correto.
-        return null;
+
+        return getEstudantesMulheresAprovadas(estudantes.stream())
+                .stream().sorted(Comparator.comparing(Estudante::getCurso)
+                        .thenComparing(Estudante::getNota, Comparator.reverseOrder()))
+                .toList();
     }
 
     /**
